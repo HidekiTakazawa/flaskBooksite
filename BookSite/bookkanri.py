@@ -14,7 +14,7 @@ def index():
     """Show all the bookDatas, most recent first."""
     db = get_db()
     bookDatas = db.execute(
-        'SELECT p.id, bookTitle, author, manager_id, managername, created'
+        'SELECT p.id, bookTitle, author, publisher, price, purchaseDate, memo,  manager_id, managername, created'
         ' FROM bookData p JOIN manager u ON p.manager_id = u.id'
         ' ORDER BY bookTitle'
     ).fetchall()
@@ -32,7 +32,7 @@ def get_bookData(id, check_author=True):
     :raise 403: if the current manager isn't the author
     """
     bookData= get_db().execute(
-        'SELECT p.id, bookTitle, author,  manager_id, managername'
+        'SELECT p.id, bookTitle, author, publisher, price, purchaseDate, memo,  manager_id, managername'
         ' FROM bookData p JOIN manager u ON p.manager_id = u.id'
         ' WHERE p.id = ?',
         (id,)

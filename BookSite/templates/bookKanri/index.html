@@ -1,28 +1,38 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Posts{% endblock %}</h1>
+  <h1>{% block title %}蔵書一覧{% endblock %}</h1>
   {% if g.manager %}
     <a class="action" href="{{ url_for('bookKanri.create') }}">New</a>
   {% endif %}
 {% endblock %}
 
 {% block content %}
-  {% for bookData in bookDatas %}
-    <article class="post">
-      <header>
-        <div>
-          <h1>{{ bookData['bookTitle'] }}</h1>
-          <div class="about">by {{ bookData['managername'] }} on {{ bookData['created'].strftime('%Y-%m-%d') }}</div>
-        </div>
-        {% if g.manager['id'] == bookData['manager_id'] %}
-          <a class="action" href="{{ url_for('bookKanri.update', id=bookData['id']) }}">Edit</a>
-        {% endif %}
-      </header>
-      <p class="body">{{ bookData['author'] }}</p>
-    </article>
-    {% if not loop.last %}
-      <hr>
-    {% endif %}
-  {% endfor %}
+  <table border=1>
+	   
+    <th>書名</th>
+    <th>著者名</th>
+    <th>出版社</th>
+    <th>購入日</th>
+    <th>定価</th>
+    <th>メモ</th>
+    {% for bookData in bookDatas %}
+      <form action="" method="POST">
+    
+          <tr>
+            <td>{{ bookData['bookTitle'] }}</td>
+            <td>{{ bookData['author'] }}</td>
+            <td>{{ bookData['publisher'] }}</td>
+            <td>{{ bookData['purchaseDate'] }}</td>
+            <td>{{ bookData['price'] }}</td>
+            <td>{{ bookData['memo'] }}</td>
+            <td>{{ bookData['id'] }}</td>
+            {% if g.manager['id'] == bookData['manager_id'] %}
+                <td>  <a class="action" href="{{ url_for('bookKanri.update', id=bookData['id']) }}">Edit</a></td>
+            {% endif %}
+           </tr>
+    {% endfor %}
+      </form>
+    </table>
+ 
 {% endblock %}

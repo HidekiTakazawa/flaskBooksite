@@ -7,17 +7,17 @@
 {% block content %}
   <form method="post">
     <label for="bookTitle">bookTitle</label>
-    <input name="bookTitle" id="bookTitle" value="{{ request.form['bookTitle'] or bookData['bookTitle'] }}" required>
+    <input name="bookTitle" id="bookTitle" value="{{ bookData['bookTitle'] }}" required>
     <label for="author">author</label>
-    <input name="author" id="author" value="{{ request.form['author'] or bookData['author'] }}" required>
+    <input name="author" id="author" value="{{ bookData['author'] }}" required>
     <label for="publisher">出版社</label>
-    <input name="publisher" id="publisher" value="{{ request.form['publisher'] or bookData['publisher'] }}" required>
+    <input name="publisher" id="publisher" value="{{ bookData['publisher'] }}" required>
     <label for="price">値段</label>
-    <input name="price" id="price" value="{{ request.form['price'] or bookData['price'] }}">
+    <input name="price" id="price" value="{{ bookData['price'] }}">
     <label for="purchaseDate">購入日</label>
-    <input name="purchaseDate" id="purchaseDate" value="{{ request.form['purchaseDate'] or bookData['purchaseDate'] }}">
+    <input name="purchaseDate" id="purchaseDate" value="{{ bookData['purchaseDate'] }}">
     <label for="memo">メモ</label>
-    <input name="memo" id="memo" value="{{ request.form['memo'] or bookData['memo'] }}">
+    <input name="memo" id="memo" value="{{ bookData['memo'] }}">
     <input type="submit" value="Save">
   </form>
   <hr>

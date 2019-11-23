@@ -2,6 +2,6 @@
 *~
 __pycache__
 myenv
-db.sqlite3
+BookSite.sqlite
 /static
 .DS_Store
