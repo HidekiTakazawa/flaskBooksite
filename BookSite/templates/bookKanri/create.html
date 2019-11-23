@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}New Post{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="bookTtitle">bookTitle</label>
+    <input name="bookTitle" id="bookTitle" value="{{ request.form['bookTitle'] }}" required>
+    <label for="author">author</label>
+    <input name="author" id="author" value="{{ request.form['author'] }}" required>
+    <label for="publisher">出版社</label>
+    <input name="publisher" id="publisher" value="{{ request.form['publisher'] }}" required>
+    <label for="price">値段</label>
+    <input name="price" id="price" value="{{ request.form['price'] }}">
+    <label for="purchaseDate">購入日</label>
+    <input name="purchaseDate" id="purchaseDate" value="{{ request.form['purchaseDate'] }}">
+    <label for="memo">メモ</label>
+    <input name="memo" id="memo" value="{{ request.form['memo'] }}">
+    <input type="submit" value="Save">
+  </form> 
+{% endblock %}
