@@ -13,6 +13,7 @@ CREATE TABLE manager (
 CREATE TABLE bookData (
   id INTEGER PRIMARY KEY,
   manager_id INTEGER NOT NULL,
+  jyanru TEXT NOT NULL,
   bookTitle TEXT NOT NULL,
   author TEXT NOT NULL,
   publisher TEXT NOT NULL,

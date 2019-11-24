@@ -9,7 +9,7 @@
 
 {% block content %}
   <table border=1>
-	   
+	  <th>ジャンル</th> 
     <th>書名</th>
     <th>著者名</th>
     <th>出版社</th>
@@ -20,6 +20,7 @@
       <form action="" method="POST">
     
           <tr>
+            <td>{{ bookData['jyanru'] }}</td>
             <td>{{ bookData['bookTitle'] }}</td>
             <td>{{ bookData['author'] }}</td>
             <td>{{ bookData['publisher'] }}</td>

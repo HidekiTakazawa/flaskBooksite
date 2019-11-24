@@ -2,7 +2,7 @@
 <title>{% block title %}{% endblock %} - bookKanri</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
-  <h1>bookKanri</h1>
+  <h1>蔵書管理</h1>
   <ul>
     {% if g.manager %}
       <li><span>{{ g.manager['managername'] }}</span>

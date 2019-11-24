@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Edit "{{ bookData['bookTitle'] }}"{% endblock %}</h1>
+  <h1>{% block title %}{{ bookData['bookTitle'] }}{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
   <form method="post">
-    <label for="bookTitle">bookTitle</label>
+    <label for="jyanru">ジャンル</label>
+    <input name="jyanru" id="jyanru" list="jyanruList" value="{{ bookData['jyanru'] }}" required>
+    <label for="bookTitle">本題名</label>
     <input name="bookTitle" id="bookTitle" value="{{ bookData['bookTitle'] }}" required>
-    <label for="author">author</label>
+    <label for="author">著者</label>
     <input name="author" id="author" value="{{ bookData['author'] }}" required>
     <label for="publisher">出版社</label>
     <input name="publisher" id="publisher" value="{{ bookData['publisher'] }}" required>
@@ -19,6 +21,14 @@
     <label for="memo">メモ</label>
     <input name="memo" id="memo" value="{{ bookData['memo'] }}">
     <input type="submit" value="Save">
+    <datalist id="jyanruList">
+      <option value="数学"></option>
+      <option value="コンピューター"></option>
+      <option value="プログラム"></option>
+      <option value="社会科学"></option>
+      <option value="科学"></option>
+      <option value="文学"></option>
+    </datalist>
   </form>
   <hr>
   <form action="{{ url_for('bookKanri.delete', id=bookData['id']) }}" method="post">

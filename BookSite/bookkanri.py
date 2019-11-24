@@ -14,9 +14,9 @@ def index():
     """Show all the bookDatas, most recent first."""
     db = get_db()
     bookDatas = db.execute(
-        'SELECT p.id, bookTitle, author, publisher, price, purchaseDate, memo,  manager_id, managername, created'
+        'SELECT p.id, jyanru, bookTitle, author, publisher, price, purchaseDate, memo,  manager_id, managername, created'
         ' FROM bookData p JOIN manager u ON p.manager_id = u.id'
-        ' ORDER BY bookTitle'
+        ' ORDER BY jyanru, bookTitle'
     ).fetchall()
     return render_template('bookKanri/index.html', bookDatas=bookDatas)
 
@@ -32,7 +32,7 @@ def get_bookData(id, check_author=True):
     :raise 403: if the current manager isn't the author
     """
     bookData= get_db().execute(
-        'SELECT p.id, bookTitle, author, publisher, price, purchaseDate, memo,  manager_id, managername'
+        'SELECT p.id, jyanru, bookTitle, author, publisher, price, purchaseDate, memo,  manager_id, managername'
         ' FROM bookData p JOIN manager u ON p.manager_id = u.id'
         ' WHERE p.id = ?',
         (id,)
@@ -52,6 +52,7 @@ def get_bookData(id, check_author=True):
 def create():
     """Create a new bookDatafor the current manager."""
     if request.method == 'POST':
+        jyanru = request.form['jyanru']
         bookTitle = request.form['bookTitle']
         author = request.form['author']
         publisher = request.form['publisher']
@@ -68,9 +69,9 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO bookData(bookTitle, author, publisher, price, purchaseDate, memo, manager_id)'
-                ' VALUES (?, ?, ?, ?, ?, ?, ?)',
-                (bookTitle, author, publisher, price, purchaseDate, memo, g.manager['id'])
+                'INSERT INTO bookData(jyanru, bookTitle, author, publisher, price, purchaseDate, memo, manager_id)'
+                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                (jyanru, bookTitle, author, publisher, price, purchaseDate, memo, g.manager['id'])
             )
             db.commit()
             return redirect(url_for('bookKanri.index'))
@@ -85,6 +86,7 @@ def update(id):
     bookData= get_bookData(id)
 
     if request.method == 'POST':
+        jyanru = request.form['jyanru']
         bookTitle = request.form['bookTitle']
         author = request.form['author']
         publisher = request.form['publisher']
@@ -101,8 +103,8 @@ def update(id):
         else:
             db = get_db()
             db.execute(
-                'UPDATE bookData SET bookTitle = ?, author = ?,  publisher = ?, price = ?, purchaseDate = ?, memo = ? WHERE id = ?',
-                (bookTitle, author, publisher, price, purchaseDate, memo, id)
+                'UPDATE bookData SET jyanru = ?, bookTitle = ?, author = ?,  publisher = ?, price = ?, purchaseDate = ?, memo = ? WHERE id = ?',
+                (jyanru, bookTitle, author, publisher, price, purchaseDate, memo, id)
             )
             db.commit()
             return redirect(url_for('bookKanri.index'))

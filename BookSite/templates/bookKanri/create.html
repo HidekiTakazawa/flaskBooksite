@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}New Post{% endblock %}</h1>
+  <h1>{% block title %}新規登録{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
   <form method="post">
+    <label for="jyanru">ジャンル</label>
+    <input name="jyanru" id="jyanru" list="jyanruList" value="{{ request.form['jyanru'] }}" required>
     <label for="bookTtitle">bookTitle</label>
     <input name="bookTitle" id="bookTitle" value="{{ request.form['bookTitle'] }}" required>
     <label for="author">author</label>
@@ -19,5 +21,13 @@
     <label for="memo">メモ</label>
     <input name="memo" id="memo" value="{{ request.form['memo'] }}">
     <input type="submit" value="Save">
+    <datalist id="jyanruList">
+      <option value="数学"></option>
+      <option value="コンピューター"></option>
+      <option value="プログラム"></option>
+      <option value="社会科学"></option>
+      <option value="科学"></option>
+      <option value="文学"></option>
+    </datalist>
   </form> 
 {% endblock %}
